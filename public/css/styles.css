@@ -33,10 +33,14 @@ nav ul a:hover {
 	text-decoration: none;
 	color: #93072a;
 }
-
+/*container*/
+section {
+	display: flex;
+}
 /*left columns*/
 .left-column {
 	float: left;
+	overflow: auto;
 	width: 18.5%;
 	height: auto;
 	background-color: #444343;
@@ -47,6 +51,20 @@ nav ul a:hover {
 	padding: 20px 10px;
 	color: white;
 
+}
+
+h4 {
+	color: white;
+}
+
+/*content area*/
+.content {
+	float: left;
+	width: 60%;
+	margin: 20px;
+	padding: 20px;
+	border: 1px solid #666;
+	background-color: #f7f7f7;
 }
 
 /*this is supposed to help create a sticky footer*/
