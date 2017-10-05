@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": null,
-    "database": null,
+    "password": "bamcamlam87!",
+    "database": "daca_db",
     "host": "localhost",
     "dialect": "mysql"
   },

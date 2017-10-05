@@ -37,6 +37,12 @@ nav ul a:hover {
 section {
 	display: flex;
 }
+
+/* Register/Signin link styling */
+#register-signin-link{  
+  padding-top: 18px;
+  height: 100px;
+}
 /*left columns*/
 .left-column {
 	float: left;
@@ -50,6 +56,22 @@ section {
 .left-column li a {
 	padding: 20px 10px;
 	color: white;
+
+}
+
+/*left columns*/
+.right-column {
+  float: right;
+  overflow: auto;
+  /*width: 18.5%;*/
+  height: auto;
+  background-color: #444343;
+  padding: 10px 20px;
+}
+
+.left-column li a {
+  padding: 20px 10px;
+  color: white;
 
 }
 
@@ -78,6 +100,10 @@ h5 {
     flex: 1 0 auto;
   }
 
+
+
+
+
 /*footer styling*/
 .footer {
 	float: right;
@@ -95,4 +121,46 @@ h5 {
     padding-top: 20px;
     color: #fff;
     background-color: #d81327;
+}
+
+/*Discussion-Post stying*/
+
+div.center{
+  padding-top:10px;
+}
+
+.ul-post{
+  padding-top:5px;
+  padding-bottom:5px;
+}
+
+.li-post{
+  margin: 10px 10px 10px 10px;
+}
+
+#posts{
+  background-color: white;
+}
+
+/* Loggin form styling */
+#loggin-form{
+  border: #444343 solid 3px;
+  width:90%;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+
+/* Register form styling */
+#new-user-form{
+   /*border: #444343 solid 2px;*/
+  width:90%;
+  margin-top: 0;
+}
+
+.signin-register-label{
+  /*width: 100px;*/
+  height: 30px;
+  margin: 0 5px 0 5px;
+  margin-bottom: 0;
 }

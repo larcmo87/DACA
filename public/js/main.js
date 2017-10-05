@@ -11,8 +11,26 @@ var numResults = 0;
 var startYear = 0;
 var endYear = 0;
 var numArticles = 10;
+var alreadyLoggedIn = false;
 
 var beingDate = new Date();
+
+var newUserId = $("#new-user-id");
+  var newPassword = $("#new-password");
+
+  // Gets the part of the url that comes after the "?" (which we have if we're updating a post)
+  var url = window.location.search;
+  var postId;
+  
+  // Sets a flag for whether or not we're updating a post to be false initially
+  var updating = false;
+
+  // If we have this section in our url, we pull out the post id from the url
+  // In '?post_id=1', postId is 1
+  if (url.indexOf("?post_id=") !== -1) {
+    postId = url.split("=")[1];
+    getPostData(postId, "post");
+  }
 
 beingDate = moment(beingDate).format("YYYYMMDD");
 
@@ -75,9 +93,9 @@ function runQuery(numArticles, queryURLBase) {
           "<a href='" + NYTData.response.docs[i].web_url + "' style='text-decoration:none;color:black'>" +
             "<div class='row' style='height:100%'>" +
                 "<div class='col s12 m6'>" +
-                  "<div class='card  z-depth-4' style='height:375px'>" +                     
+                  "<div class='card  z-depth-4' style='height:390px'>" +                     
                     "<div class='card-image'>" + 
-                      "<img src='images/daca" + imageCount + ".jpg' style='height:250px'>" +
+                      "<img src='images/daca" + imageCount + ".jpg' class='responsive-img' style='height:250px'>" +
                      
                     "</div>" +
                     "<div class='card-content'>" +
@@ -96,61 +114,105 @@ function runQuery(numArticles, queryURLBase) {
         
   });
 
-   /* // Loop through and provide the correct number of articles
-    for (var i = 0; i < numArticles; i++) {
-
-      // Add to the Article Counter (to make sure we show the right number)
-      articleCounter++;
-
-      // Create the HTML well (section) and add the article content for each
-      var wellSection = $("<div>");
-      wellSection.addClass("well");
-      wellSection.attr("id", "article-well-" + articleCounter);
-      $("#well-section").append(wellSection);
-
-      // Confirm that the specific JSON for the article isn't missing any details
-      // If the article has a headline include the headline in the HTML
-      if (NYTData.response.docs[i].headline !== "null") {
-        $("#article-well-" + articleCounter)
-          .append(
-            "<h3 class='articleHeadline'><span class='label label-primary'>" +
-            articleCounter + "</span><strong> " +
-            NYTData.response.docs[i].headline.main + "</strong></h3>"
-          );
-
-        // Log the first article's headline to console
-        console.log(NYTData.response.docs[i].headline.main);
-      }
-
-      // If the article has a byline include the headline in the HTML
-      if (NYTData.response.docs[i].byline && NYTData.response.docs[i].byline.original) {
-        $("#article-well-" + articleCounter)
-          .append("<h5>" + NYTData.response.docs[i].byline.original + "</h5>");
-
-        // Log the first article's Author to console.
-        console.log(NYTData.response.docs[i].byline.original);
-      }
-
-      // Then display the remaining fields in the HTML (Section Name, Date, URL)
-      $("#articleWell-" + articleCounter)
-        .append("<h5>Section: " + NYTData.response.docs[i].section_name + "</h5>");
-      $("#articleWell-" + articleCounter)
-        .append("<h5>" + NYTData.response.docs[i].pub_date + "</h5>");
-      $("#articleWell-" + articleCounter)
-        .append(
-          "<a href='" + NYTData.response.docs[i].web_url + "'>" +
-          NYTData.response.docs[i].web_url + "</a>"
-        );
-
-      // Log the remaining fields to console as well
-      console.log(NYTData.response.docs[i].pub_date);
-      console.log(NYTData.response.docs[i].section_name);
-      console.log(NYTData.response.docs[i].web_url);
-    }
-  });*/
  
 }
 
+$(document).on("submit", "#new-user-form", handleNewUserFormSubmit);
+
+/*Create Post button on click event*/
+$("#post-btn").on("click",function(){
+   var sessionValue = sessionStorage.getItem("LoggedIn");
+   console.log("post btn clicked. sessionValue = "+ sessionValue);
+
+        if(sessionValue){
+          console.log("sesion Open");
+        }else{
+          console.log("session closed");
+          $("#loggin-form").css("display", "inline-block");
+        }
+/*
+  if(alreadyLoggedIn){
+    window.location.href = "/post";
+  }else{
+   window.location.href = "/login";
+  }*/
+  
+
+});
+
+// Initialize collapse button
+  $(".button-collapse").sideNav({
+     edge: 'right'
+  });
+  // Initialize collapsible (uncomment the line below if you use the dropdown variation)
+  $('.collapsible').collapsible();
+
+// $("#new-btn").on("submit",function(){
+//   handleFormSubmit(post);
+
+// });
+
+ // A function for handling what happens when the form to create a new post is submitted
+  function handleNewUserFormSubmit(event) {
+    event.preventDefault();
+    // Wont submit the post if we are missing a body, title, or author
+    if (!$("#new-user-id").val().trim()){
+      
+      $("#new-user-id").focus();
+      return Materialize.toast('User Id field is required', 3000, 'rounded');
+      
+    }
+
+    if(!$("#new-password").val().trim()) {
+      $("#new-password").focus();
+      return Materialize.toast('Password field is required', 3000, 'rounded');
+
+    }
+    // Constructing a newPost object to hand to the database
+    var newUser = {
+      userId: newUserId
+        .val()
+        .trim(),
+      userPW: newPassword
+        .val()
+        .trim()
+    };
+
+    // If we're updating a post run updatePost to update a post
+    // Otherwise run submitPost to create a whole new post
+    if (updating) {
+      newPost.id = postId;
+      updatePost(newPost);
+    }
+    else {
+      // Clear sessionStorage
+      sessionStorage.clear();
+
+      // Store clients logged is "true" into sessionStorage.
+      //This will keep the user logged in as long as their session is open
+      sessionStorage.setItem("LoggedIn", true);
+      submitNewUser(newUser);
+    }
+  }
+
+  // Submits a new post and brings user to blog page upon completion
+  function submitNewUser(post) {
+    $.post("/api/users", post, function() {
+      window.location.href = "/";
+    });
+  }
+
+
+  /*$("#post-btn").on("click", function(){
+        var sessionValue = sessionStorage.getItem("LoggedIn");
+
+        if(sessionValue){
+          console.log("sesion Open");
+        }else{
+          console.log("session closed");
+        }
+
+  });*/
         
 runQuery(numArticles, queryURLBase);
 

@@ -16,20 +16,75 @@
 </head>
 <body>
 <!-- jumbotron -->
+	<!-- Hidden side panel that contains the Signin and Register forms -->
+	<ul id="slide-out" class="side-nav">
+		<li>
+			<h5 class="signin-register-label red z-depth-2">Signin<h5>
+			<div class="row" id="loggin-form">
+				<form class="white">
+			      	<div class="row">
+				        <div class="input-field col s12">
+				          <input id="user_id" type="text" class="validate black-text">
+				          <label for="user_id">User Id</label>
+				        </div>
+				    </div>
+				    <div class="row">
+				        <div class="input-field col s12">
+				          <input id="password" type="password" class="validate black-text">
+				          <label for="password">Password</label>
+				        </div>		        
+			      	</div>
+				    <div class="row">
+			        	<div class="right-align col s12">
+							<button class="btn waves-effect waves-light red left" type="submit" name="action">Signin</button>
+						</div>
+					</div>
+			    </form>
+			 </div>
+		</li>
+		<li>
+			<h5 class="signin-register-label red z-depth-2">Register<h5>
+			<div class="row" id="new-user-form">
+
+			    <form class="white">
+			      
+			        <div class="row">
+				        <div class="input-field col s12">
+				          <input id="new-user-id" type="text" class="validate black-text" >
+				          <label for="new-user-id">User Id</label>
+				        </div>
+				    </div>
+				    <div class="row">
+				        <div class="input-field col s12">
+				          <input id="new-password" type="password" class="validate black-text">
+				          <label for="new-password">Password</label>
+				        </div>		        
+			      	</div>
+			      	<div class="row">
+			        	<div class="right-align col s12">
+							<button class="btn waves-effect waves-light red left" type="submit" id="new-btn" name="action">Register</button>
+						</div>
+					</div>
+	     		</form>
+ 			</div>
+		</li>
+	</ul> <!-- End of Hidden side panel -->
  <nav>
-    <div class="nav-wrapper">
+    <div class="nav-wrapper"> 
       <a href="#" class="brand-logo"><h1><span id="banner_subheading">something</span>DACA</h1></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="">Home</a></li>
         <li><a href="">Graphs</a></li>
         <li><a href="">Discussion</a></li>
-        <li><a href="">Register/Signin</a></li>
+        <li><a href="" data-activates="slide-out" class="button-collapse show-on-large" id="register-signin-link">Register/Signin</a></li>
+        <!-- <li><a href="" data-activates="slide-out" class="button-collapse show-on-large">Register/Signin</a></li> -->
       </ul>
     </div>
   </nav>
+  <!-- <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a> -->
   <section>
 	  <!-- left column -->
-	  <div class="left-column">
+	  <div class="left-column col-2">
 		  <h5>Articles on DACA:</h5>
 		  <ul>
 			  <li>
@@ -58,16 +113,49 @@
 
 		</div>
 		<div class="row">
-	  	<div class="col 12">
-	  		<div class="slider">
-			    <ul class="slides white">
-			    </ul> 
-  			</div>
+		  	<div class="col 12">
+		  		<!-- Artical Slider at bottom of page -->
+		  		<div class="slider">
+				    <ul class="slides white">
+				    </ul> 
+	  			</div>
 
-	  	</div>
+		  	</div>
 	  </div>
 	 </div>
+	  <!-- left column -->
+	  <div class="right-column col-3">
+	  	 <h5>Articles on DACA:</h5>
+		  <ul class="grey ul-post">
+			  <li class="z-depth-2 white li-post">
+			  	<div class="vertical-wrap">
+			  		Poster Name: Rob Morris
+			  	</div>
+			  	<hr>
+			  	<div>
+			  		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, at deserunt modi ea voluptatum vel doloremque molestiae voluptate hic accusamus natus, iste ad quidem incidunt, excepturi saepe repudiandae architecto. Distinctio?</p>
+			  	</div>
+			  	
+			  </li>
+			  
+			  <li class="z-depth-2 white li-post">
+			  	<div class="center center-horizontal">
+			  		Poster Name: James Brown
+			  	</div>
+			  	<hr>
+			  	<div>
+			  		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, at deserunt modi ea voluptatum vel doloremque molestiae voluptate hic accusamus natus, iste ad quidem incidunt, excepturi saepe repudiandae architecto. Distinctio?</p>
+			  	</div>
+			 
+		  </ul>
+		   
+		 <!-- <button class="btn btn-default" href="/login" id="post-btn">Post it</button> -->
+		<!--  <a class="btn btn-default" href="/login" id="post-btn">Create a Post</a> -->
+		 <button class="btn waves-effect waves-light" id="post-btn">Create Post</button>
+		 
+	  </div>
 	</section>
+	<!-- <div style="height:500px"></div> -->
 <!-- footer -->
 <footer class="page-footer">
             <div class="container">
