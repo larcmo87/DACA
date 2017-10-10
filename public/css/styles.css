@@ -54,9 +54,11 @@ section {
   text-align: center;
 }
 
+.discussion{
+  margin-left: 30%;
+}
 /*slider*/
 .slider {
-  width: 60%;
   height: 500px;
   width: 700px;
 }
@@ -139,4 +141,41 @@ section {
   height: 30px;
   margin: 0 5px 0 5px;
   margin-bottom: 0;
+}
+
+/* Discussion Card styling */
+.discussion-card-title{
+  background-color: #e82020;
+  color: white;
+}
+ 
+.card-body{
+  
+  height: 120px;
+} 
+
+.card-title-h6{
+  display:block;
+}
+
+/* Selected Discussion Styling */
+#selected-discussion{
+  height:200px;
+  width:95%; 
+  resize:none;
+}
+
+#selected-discussion-area{
+  border-right-style:solid; 
+  border-right-color: black;
+  border-right-width: 1px;
+}
+
+#selected-discussion-view{
+  margin-left: 100px;
+}
+
+#selected_discussion-title{
+  width: 95%;
+  resize:none;
 }
