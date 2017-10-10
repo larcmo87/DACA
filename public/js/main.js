@@ -16,7 +16,13 @@ var alreadyLoggedIn = false;
 var beingDate = new Date();
 
 var newUserId = $("#new-user-id");
-  var newPassword = $("#new-password");
+var newPassword = $("#new-password");
+var signinUserId = $("#user_id");
+var signinUserPW = $("#password");
+
+var global_userId = {
+  user_id: ""
+}
 
   // Gets the part of the url that comes after the "?" (which we have if we're updating a post)
   var url = window.location.search;
@@ -117,26 +123,54 @@ function runQuery(numArticles, queryURLBase) {
  
 }
 
+function loadDiscussionCards(){
+   $.get("/api/posts", function(res) {
+      console.log("get res value = " + JSON.stringify(res,null,2));
+      console.log("res title " + res[0].title);
+      var resLenght = res.length;
+
+      if(resLenght > 5){
+        for(var i = 0; i < 5; i++){
+          $("#card-" + [i + 1] + "-title").text(res[i].title); 
+           $("#card-" + [i + 1] + "-a").attr("name",res[i].id);         
+          $("#card-" + [i + 1] + "-paragraph").text(res[i].body);
+        }
+      }else{
+        for(var i = 0; i < resLenght; i++){
+          $("#card-" + [i + 1] + "-title").text(res[i].title);
+          $("#card-" + [i + 1] + "-title-h6").text(res[i].id);  
+          $("#card-" + [i + 1] + "-paragraph").text(res[i].body);
+        }
+      }
+   });
+}
+
 $(document).on("submit", "#new-user-form", handleNewUserFormSubmit);
 
-/*Create Post button on click event*/
-$("#post-btn").on("click",function(){
-   var sessionValue = sessionStorage.getItem("LoggedIn");
-   console.log("post btn clicked. sessionValue = "+ sessionValue);
 
-        if(sessionValue){
-          console.log("sesion Open");
-        }else{
-          console.log("session closed");
-          $("#loggin-form").css("display", "inline-block");
-        }
-/*
-  if(alreadyLoggedIn){
-    window.location.href = "/post";
-  }else{
-   window.location.href = "/login";
-  }*/
+/*Create Post button on click event*/
+$("#submit-new-discussion").on("click",function(){
   
+      var localToken = localStorage.getItem("token");
+      console.log("post");
+
+      var post = {
+        token: localToken
+      }
+      console.log(post);
+     $.post("/api/posts", post, function(res) {
+        console.log("post res = " + res);
+      
+      if(!res.success){
+        console.log("Unable to register new user");
+
+      }else{
+
+        console.log("New user registered");
+      }
+     /* window.location.href = "/";*/
+    });
+    
 
 });
 
@@ -147,17 +181,13 @@ $("#post-btn").on("click",function(){
   // Initialize collapsible (uncomment the line below if you use the dropdown variation)
   $('.collapsible').collapsible();
 
-// $("#new-btn").on("submit",function(){
-//   handleFormSubmit(post);
-
-// });
 
  // A function for handling what happens when the form to create a new post is submitted
   function handleNewUserFormSubmit(event) {
     event.preventDefault();
     // Wont submit the post if we are missing a body, title, or author
     if (!$("#new-user-id").val().trim()){
-      
+       
       $("#new-user-id").focus();
       return Materialize.toast('User Id field is required', 3000, 'rounded');
       
@@ -197,26 +227,123 @@ $("#post-btn").on("click",function(){
 
   // Submits a new post and brings user to blog page upon completion
   function submitNewUser(post) {
-    $.post("/api/users", post, function() {
-      window.location.href = "/";
+    $.post("/api/users", post, function(res) {
+      if(!res){
+        console.log("Unable to register new user");
+      }else{
+
+        console.log("New user registered");
+        $("#new-user-id").val("");
+        $("#new-password").val("");
+      }
+     /* window.location.href = "/";*/
     });
   }
 
 
-  /*$("#post-btn").on("click", function(){
-        var sessionValue = sessionStorage.getItem("LoggedIn");
+  $("#loggin-form").submit(function(){
+     event.preventDefault();
 
-        if(sessionValue){
-          console.log("sesion Open");
-        }else{
-          console.log("session closed");
-        }
+      // Wont submit the post if we are missing a body, title, or author
+    if (!$("#user_id").val().trim()){
+      
+      $("#user_id").focus();
+      return Materialize.toast('User Id field is required', 3000, 'rounded');
+      
+    }
 
-  });*/
+    if(!$("#password").val().trim()) {
+      $("#password").focus();
+      return Materialize.toast('Password field is required', 3000, 'rounded');
+
+    }
+
+     console.log("In signing btn click");
+     console.log(" user id " + signinUserId.val());
+     
+    // Constructing a newPost object to hand to the database
+    var signinUser = {
+      userId: signinUserId
+        .val()
+        .trim(),
+      userPW: signinUserPW
+        .val()
+        .trim()
+
+    };
+
+    $.ajax({
+      method: "PUT",
+      url: "/api/signin",
+      data: signinUser
+    })
+    .done(function(res) {
+      // console.log("res = " + JSON.stringify(res.user_id));
+
+      //Store the web token locally
+      localStorage.setItem("token", res.token);
+      localStorage.setItem("userId", res.user_id);
+
+      //Login authentication unsuccessfull then
+      //clear entries, set focus on Uwer id 
+      //and show error in toast
+      if(!res.success){
+         
+        $("#user_id").val("");
+        $("#user_id").focus();
+        $("#password").val("");
+        return Materialize.toast(res.token, 3000, 'rounded');
+      
+      //If sign in successful then cler entries, display
+      //success toast message and redirect to index html
+      }else{
+        $("#user_id").val("");        
+        $("#password").val("");
+        return Materialize.toast("Sign in successful!", 3000, 'rounded');
+
+        window.location.href = "/";
+      }
+      /*window.location.href = "/blog";*/
+    });
+
+
+    // authenticateSignin(signinUser);
+    console.log("signinUser = " + JSON.stringify(signinUser));
+  
+  });
+
+   // Update a given post, bring user to the blog page when done
+  function authenticateSignin(post) {
+    $.ajax({
+      method: "GET",
+      url: "/api/signin",
+      data: post
+    })
+    .done(function(res) {
+      console.log("res returned = " + res.body);
+      /*window.location.href = "/blog";*/
+    });
+  }
+
+//Click event on selected discussion
+$(".open-discussion").on("click",function(){
+  
+
+  var discussionCardValue = "";
+
+  //Get the name attribute value (this is the post id from the database table)
+  discussionCardValue = $(this).attr("name");
+  console.log("dis card value = " + discussionCardValue);
+  
+  //Store post id in local storage. This will be used to 
+  //get the post and render it on the discussions.html page
+  localStorage.setItem("postId", discussionCardValue);
+
+  //goto the discusstions.html page
+  window.location.href = "discussion.html";
+
+});
         
 runQuery(numArticles, queryURLBase);
+loadDiscussionCards();
 
-/*$(document).ready(function(){
-         $('.slider').slider({full_width: true});
-        });*/
- 

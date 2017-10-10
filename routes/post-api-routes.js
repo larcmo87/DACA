@@ -7,6 +7,9 @@
 
 // Requiring our models
 var db = require("../models");
+//Require jsonwebtoken. Used to validate web tokien sent in POST request
+var jwt = require("jsonwebtoken");
+
 
 // Routes
 // =============================================================
@@ -26,10 +29,11 @@ module.exports = function(app) {
   });
 
   // Get rotue for retrieving a single post
-  app.get("/api/posts/:id", function(req, res) {
+  app.get("/api/selectedPost", function(req, res) {
+    console.log("get id post = " + JSON.stringify(req.query));
     db.Post.findOne({
       where: {
-        id: req.params.id
+        id: req.query.postId
       }
     }).then(function(dbPost) {
       console.log(dbPost);
@@ -39,9 +43,42 @@ module.exports = function(app) {
 
   // POST route for saving a new post
   app.post("/api/posts", function(req, res) {
-    db.Post.create(req.body).then(function(dbPost) {
-      res.json(dbPost);
-    });
+     var token = req.body.token;
+       console.log(JSON.stringify(req.body));
+     //Check if there is a token send in request
+     if(token){
+        //Verify the json web token
+        jwt.verify(token, process.env.SECRET_KEY, function(err, decode){
+           //If token is invalid then renturn error 500
+            if(err){
+                console.log("Err 500");
+               return res.json({token:false});
+               
+            }else{
+
+              /* db.Post.create(req.body).then(function(dbPost) {
+                res.json(dbPost);
+              });*/
+               //Creat variable to store the new user id and hashed password
+              var newDiscussion = {
+                title: req.body.title,
+                body: req.body.discussion,//hassed user password   
+                UserId: req.body.userId       
+              };
+              //Insert the new user id and password
+              db.Post.create(newDiscussion).then(function(dbPost) {
+                console.log("the returned dbPost value " + JSON.stringify(dbPost));
+                 return res.json(dbPost);
+              });
+            
+            }
+        });
+     }else{
+       //If no token is sent in request return json objec with token attribute of false
+       //This will be used in the main.js javascript logic to redirect a user to the sign in page
+        return res.json({token: false});
+     }    
+   
   });
 
   // DELETE route for deleting posts
