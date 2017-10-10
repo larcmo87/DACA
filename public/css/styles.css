@@ -83,21 +83,21 @@ section {
   text-align: center;
 }
 
-/*timeline*/
-.timeline {
+/*discussion*/
+.discussion {
   padding: 100px 50px;
   margin: 0px;
 }
 
-.timeline-header {
+.discussion-header {
   text-align: center;
 }
-.timeline-header h3 {
+.discussion-header h3 {
   opacity: .5;
   margin-bottom: 0px;
   font-weight: bold;
 }
-.timeline-header h2 {
+.discussion-header h2 {
   margin-top: 0px;
 }
 /*footer*/
