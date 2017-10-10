@@ -35,76 +35,60 @@ nav ul a:hover {
 }
 /*container*/
 section {
-	display: flex;
+	/*display: flex;*/
+  padding: 50px;
+  text-align: center;
 }
 
+.discussion{
+  margin-left: 30%;
+}
+
+/*slider*/
+.slider {
+  
+  height: 500px;
+  width: 700px;
+}
 /* Register/Signin link styling */
 #register-signin-link{  
   padding-top: 18px;
   height: 100px;
 }
-/*left columns*/
-.left-column {
-	float: left;
-	overflow: auto;
-	width: 18.5%;
-	height: auto;
-	background-color: #444343;
-	padding: 10px 20px;
-}
-
-.left-column li a {
-	padding: 20px 10px;
-	color: white;
-
-}
-
-/*left columns*/
-.right-column {
-  float: right;
-  overflow: auto;
-  /*width: 18.5%;*/
-  height: auto;
-  background-color: #444343;
-  padding: 10px 20px;
-}
-
-.left-column li a {
-  padding: 20px 10px;
-  color: white;
-
-}
-
-h5 {
-	color: white;
-}
 
 /*content area*/
 .content {
-	float: left;
-	width: 60%;
 	margin: 20px;
 	padding: 20px;
-	border: 1px solid #666;
-	background-color: #f7f7f7;
 }
 
-/*this is supposed to help create a sticky footer*/
-  body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
+/*banner*/
+.banner {
+  background-color: #e82020;
+  color: #fff;
+  padding: 20px;
+  height: 400px;
+  text-align: center;
+}
 
-  main {
-    flex: 1 0 auto;
-  }
+/*timeline*/
+.timeline {
+  padding: 100px 50px;
+  margin: 0px;
+}
 
-
-
-
-
-/*footer styling*/
+.timeline-header {
+  text-align: center;
+}
+.timeline-header h3 {
+  opacity: .5;
+  margin-bottom: 0px;
+  font-weight: bold;
+}
+.timeline-header h2 {
+  margin-top: 0px;
+}
+/*footer*/
 .footer {
 	float: right;
 }
@@ -123,24 +107,6 @@ h5 {
     background-color: #d81327;
 }
 
-/*Discussion-Post stying*/
-
-div.center{
-  padding-top:10px;
-}
-
-.ul-post{
-  padding-top:5px;
-  padding-bottom:5px;
-}
-
-.li-post{
-  margin: 10px 10px 10px 10px;
-}
-
-#posts{
-  background-color: white;
-}
 
 /* Loggin form styling */
 #loggin-form{
@@ -163,4 +129,41 @@ div.center{
   height: 30px;
   margin: 0 5px 0 5px;
   margin-bottom: 0;
+}
+
+/* Discussion Card styling */
+.discussion-card-title{
+  background-color: #e82020;
+  color: white;
+}
+ 
+.card-body{
+  
+  height: 120px;
+} 
+
+.card-title-h6{
+  display:block;
+}
+
+/* Selected Discussion Styling */
+#selected-discussion{
+  height:200px;
+  width:95%; 
+  resize:none;
+}
+
+#selected-discussion-area{
+  border-right-style:solid; 
+  border-right-color: black;
+  border-right-width: 1px;
+}
+
+#selected-discussion-view{
+  margin-left: 100px;
+}
+
+#selected_discussion-title{
+  width: 95%;
+  resize:none;
 }
