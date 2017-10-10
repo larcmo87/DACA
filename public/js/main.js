@@ -98,7 +98,7 @@ function runQuery(numArticles, queryURLBase) {
         "<li>" + 
           "<a href='" + NYTData.response.docs[i].web_url + "' style='text-decoration:none;color:black'>" +
             "<div class='row' style='height:100%'>" +
-                "<div class='col s12 m6'>" +
+                // "<div class='col s12 m6'>" +
                   "<div class='card  z-depth-4' style='height:390px'>" +                     
                     "<div class='card-image'>" + 
                       "<img src='images/daca" + imageCount + ".jpg' class='responsive-img' style='height:250px'>" +
@@ -108,7 +108,7 @@ function runQuery(numArticles, queryURLBase) {
                        "<span class='card-title'>" + NYTData.response.docs[i].headline.main + "</span>" +
                       "<p>" + NYTData.response.docs[i].snippet + "</p>" +
                     "</div>" +
-                  "</div>" +
+                  // "</div>" +
                "</div>" + 
             "</div>" +
           "</a>" + 
