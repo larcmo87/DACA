@@ -99,6 +99,31 @@ section {
   height: 400px;
   text-align: center;
 }
+
+.material-icons{
+  font-size: 124px; 
+}
+
+#diff{
+  font-size: 67px;
+  margin-left: -120px;
+  position: relative;
+  top: 11px;
+}
+
+.small {
+  font-size: 124px;
+}
+
+p {
+  text-align: left;
+}
+
+h3 {
+    opacity: .5;
+    margin-bottom: 21px;
+    font-weight: bold;
+}
 /*graphs*/
 .graph {
   padding: 30px 20px 20px 40px;
