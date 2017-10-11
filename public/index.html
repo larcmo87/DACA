@@ -29,8 +29,9 @@
 	
 </head>
 <body>
-<!-- jumbotron -->
-	<a href="top"></a><!-- Hidden side panel that contains the Signin and Register forms -->
+<!-- nav -->
+	<a href="top"></a>
+	<!-- Hidden side panel that contains the Signin and Register forms -->
 	<ul id="slide-out" class="side-nav">
 		<li>
 			<h5 class="signin-register-label red z-depth-2">Signin<h5>
@@ -82,7 +83,9 @@
 	     		</form>
  			</div>
 		</li>
-	</ul> <!-- End of Hidden side panel -->
+	</ul> 
+	<!-- End of Hidden side panel -->
+	<!-- nav -->
  <nav>
     <div class="nav-wrapper"> 
       <a href="#"><div  class="brand-logo"></div></a>
@@ -97,8 +100,9 @@
       </ul>
     </div>
   </nav>
+  <!-- end of nav -->
   	<!-- slider row -->
-	<div class="row">
+	<div class="row firstrow">
 		<div class="col s2"></div>
 	  	<div class="col s8">
 		  	<div class="content">
@@ -115,22 +119,57 @@
     </div>
     <!-- banner -->
 	<div class="row banner">
-		<div class="col s12">
-			<div class="col s4">
-				<h5>Employment</h5>
-				<span class="glyphicons glyphicons-fingerprint-scan"></span>
-			</div>
-			<div class="col s4">
-				<h5>Dreamers</h5>
-				<span class="glyphicons glyphicons-vcard"></span>
-			</div>
-			<div class="col s4">
-				<h5>Families</h5>
-				<span class="glyphicons glyphicons-businessman"></span>
-			</div>
-		</div>
-	</div>
+        <div class="col s12 timeline-header">
+            <h3><i id='diff' class="material-icons">info_outline</i><medium>What is DACA?</medium></h3>
+            <p>The DACA program was formed through executive order by former President Barack Obama in 2012 and allows certain people, called Dreamers, who come to the U.S. illegally as minors to be protected from immediate deportation. Recipients are able to request “consideration of deferred action” for a period of two years which is subject to renewal.<p>
+            <p>Deferred action is a use of prosecutorial discretion to defer removal action against an individual for a certain period of time. Deferred action does not provide lawful status.<p>
+        </div>
 
+        <div class="col s12">
+            <div class="col s4">
+                <h5>Employment</h5>
+                <!-- <span class="glyphicons glyphicons-nameplate"></span> -->
+                <i class="material-icons">assignment_ind</i>
+                <h5>ECONOMIC CONTRIBUTORS</h5>
+                <h6>New and better jobs and increased earnings characterize DACA participants.
+                <!-- <i class="material-icons md-48">face</i> -->
+            </div>
+            <div class="col s4">
+                <h5>Dreamers</h5>
+                <i class="material-icons">supervisor_account</i>
+                <h5>800,000 DREAMERS</h5>
+                <h6>"Dreamers" —undocumented immigrants, younger than 35, whose parents brought them to the United States as children.</h6>
+                <!-- <span class="glyphicons glyphicons-vcard"></span> -->
+            </div>
+            <div class="col s4">
+                <h5>Families</h5>
+                <i class="material-icons">home</i>
+                <h5>PROTECTION FOR FAMILIES</h5>
+                <h6>2 in 5 DACA recipients have a U.S. citizen as a family member.</h6>
+                <!-- <span class="glyphicons glyphicons-businessman"></span> -->
+            </div>
+        </div>
+    </div>
+	<!-- graphs -->
+    <div class="row graph">
+        <div class="col s4">
+            <img src="images/daca-states.png" width='85%'>
+            <h3><small>this graph</small></h3>
+        </div>
+        <div class="col s4">
+            <img src="images/daca-economy.png" width='85%'>
+            <h3><small>this graph</small></h3>
+        </div>
+        <div class="col s4">
+            <img src="images/daca-age-24.png" width='85%'>
+            <h3><small>this graph</small></h3>
+        </div>
+        <!-- <div class="col s4">
+            <h3><small>this graph shows</small></h3>
+            
+        </div> -->
+    </div>
+	<!-- end of graphs -->
     <!-- discussion -->
 	<div class="row discussion">
 		<div class="col s12 discussion-header">
@@ -208,7 +247,7 @@
 
 		</div>
 	</div>
-
+	<!-- end of discussion -->
 <!-- footer -->
 <footer class="page-footer">
 	<div class="row">
