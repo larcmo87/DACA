@@ -1,3 +1,6 @@
+.row {
+  margin-bottom: auto;
+}
 /*header text*/
 #banner_subheading {
 	font-size: 0.6em;
@@ -7,7 +10,7 @@ h1 {
     font-size: 45px;
     line-height: 60%;
     margin: 2rem 2rem;
-}
+} 
 
 /*navigation*/
 nav {
@@ -56,12 +59,26 @@ section {
 
 .discussion{
   margin-left: 30%;
+  background-color: #F7F6F6;
 }
 /*slider*/
 .slider {
   height: 500px;
   width: 700px;
 }
+
+.slider .indicators .indicator-item.active {
+    background-color: #991818;
+}
+/*bg of slider*/
+
+
+.firstrow {
+  background-color: #F7F6F6;
+  margin-bottom: auto;
+}
+/*end of slider*/
+
 /* Register/Signin link styling */
 #register-signin-link{  
   padding-top: 18px;
@@ -83,6 +100,36 @@ section {
   text-align: center;
 }
 
+.material-icons{
+  font-size: 124px; 
+}
+/*needed to shrink one of the materialize icons so we gave it an id*/
+#shrink{
+  font-size: 67px;
+  margin-left: -120px;
+  position: relative;
+  top: 11px;
+}
+
+.small {
+  font-size: 124px;
+}
+
+p {
+  text-align: left;
+}
+
+h3 {
+    opacity: .5;
+    margin-bottom: 21px;
+    font-weight: bold;
+}
+/*graphs*/
+.graph {
+  padding: 30px 20px 20px 40px;
+  text-align: center;
+}
+/*end of graphs*/
 /*discussion*/
 .discussion {
   padding: 100px 50px;
@@ -118,6 +165,9 @@ section {
     color: #fff;
     background-color: #d81327;
 }
+
+/*cards in discussion section*/
+/*no styling needed as of 949pm 10/9*/
 
 
 /* Loggin form styling */
